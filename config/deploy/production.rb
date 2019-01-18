@@ -59,3 +59,10 @@
 #     auth_methods: %w(publickey password)
 #     # password: "please use keys"
 #   }
+
+
+set :repo_url, 'git@github.com:pradeepAtcodingmart/visaapplicationfe.git'   # your repo url
+set :branch, 'master'
+set :stage, :production
+
+role :app, %w{root@139.59.63.110}

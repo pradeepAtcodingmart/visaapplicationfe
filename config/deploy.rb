@@ -1,8 +1,4 @@
 # config valid for current version and patch releases of Capistrano
-lock "~> 3.11.0"
-
-set :application, "my_app_name"
-set :repo_url, "git@example.com:me/my_repo.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -37,3 +33,56 @@ set :repo_url, "git@example.com:me/my_repo.git"
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+
+
+
+
+
+lock "~> 3.11.0"
+
+set :application, "visaapplicationfe"
+set :repo_url, "git@github.com:pradeepAtcodingmart/visaapplicationfe.git"
+
+
+set :deploy_to, '/var/www/visaapplicationfe'
+set :use_sudo, true
+set :scm, :git
+set :keep_releases, 5
+set :format, :pretty
+set :log_level, :debug
+
+append :linked_files, ".env"
+append :linked_dirs, "node_modules"
+
+set :nvm_type, :root
+set :nvm_node, 'v10.15.0'
+set :nvm_map_bins, %w(node npm yarn)
+set :yarn_flags, %w(--production --silent --no-progress)
+set :yarn_flags, '--production --silent --no-progress'    # default
+set :yarn_roles, :all                                     # default
+set :yarn_env_variables, {}                               # default
+set :yarn_method, 'install'                               # default
+
+namespace :deploy do
+
+    task :yarn_deploy do
+        on roles fetch(:yarn_roles) do
+            within fetch(:yarn_target_path, release_path) do
+                execute fetch(:yarn_bin), 'build'
+            end
+        end
+    end
+    before "symlink:release", :yarn_deploy
+end
+
+# set :ssh_options, { :forward_agent => true }
+# set :npm_flags, '--silent --no-progress'
+
+# namespace :deploy do
+#     desc 'Restart application'
+#     task :restart do
+#       invoke 'react:build'
+#     end   
+# end
+
+# after 'deploy:publishing', 'deploy:restart'
