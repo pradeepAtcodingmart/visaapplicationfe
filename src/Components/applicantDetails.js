@@ -5,6 +5,7 @@ import {
   Input
 } from "semantic-ui-react";
 import {Countries, SubmitButton} from './common'
+import { Redirect } from 'react-router-dom'
 import {API_URL} from './constants'
 import axios from 'axios'
 export default class ApplicantDetails extends Component {
@@ -34,6 +35,7 @@ export default class ApplicantDetails extends Component {
         }
       ],
       countries:[],
+      apiFlag:false
     }
   }
   componentDidMount(){
@@ -50,15 +52,20 @@ export default class ApplicantDetails extends Component {
   axios.post(`${API_URL}/applicant_detail`, {
     data:this.state.applicantDetails,
 })
-.then(function (response) {
+.then((response) =>{
+  this.setState({apiFlag:true});
   console.log(response);
 })
-.catch(function (error) {
+.catch((error) =>{
   console.log(error);
 })
-   window.location.href ="/passport_details"
+// history.push("/passport_details")
+  //  window.location.href ="/passport_details"
   }
   render() {
+    if (this.state.apiFlag === true) {
+      return <Redirect to='/passport_details' />
+    }
     let {
       name,
       gender,

@@ -3,6 +3,7 @@ import { Form, Input } from "semantic-ui-react";
 import {  SubmitButton } from "./common";
 import { API_URL } from "./constants";
 import axios from "axios";
+import { Redirect } from 'react-router-dom'
 
 export default class OccupationDetails extends Component {
   constructor() {
@@ -18,7 +19,8 @@ export default class OccupationDetails extends Component {
         organization: "",
         rank: "",
         placeOfPosting: ""
-      }
+      },
+      apiFlag:false
     };
   }
   handleValue = (event,{name,value}) => {
@@ -31,15 +33,18 @@ export default class OccupationDetails extends Component {
     axios.post(`${API_URL}/occupation_detail`, {
       data:this.state.occupationDetails,
   })
-  .then(function (response) {
+  .then( (response)=> {
+    this.setState({apiFlag:true})
     console.log(response);
   })
   .catch(function (error) {
     console.log(error);
   })
-  window.location.href ="/visa_details"
   }
   render() {
+    if (this.state.apiFlag === true) {
+      return <Redirect to='/visa_details' />
+    }
     let {
       presentOccupation,
       employerName,

@@ -8,6 +8,7 @@ import axios from 'axios'
 import {API_URL} from './constants'
 import { DateInput } from "semantic-ui-calendar-react";
 import { SubmitButton, today, Countries, visaTypes,purposes} from './common'
+import { Redirect } from 'react-router-dom'
 
 export default class VisaApplication extends Component {
   constructor() {
@@ -28,6 +29,7 @@ export default class VisaApplication extends Component {
       countries:[],
       visaTypes:visaTypes,
       purposes:purposes,
+      apiFlag:false
     };
   }
 
@@ -46,16 +48,19 @@ handleSubmit =()=>{
   axios.post(`${API_URL}/profile_detail`, {
     data:this.state.basicDetails,
 })
-.then(function (response) {
+.then( (response) =>{
+  this.setState({apiFlag:true})
   console.log(response);
 })
 .catch(function (error) {
   console.log(error);
 })
-window.location.href="/applicant_details";
 }
 
   render() {
+    if (this.state.apiFlag === true) {
+      return <Redirect to='/applicant_details' />
+    }
     let {
       visaApplyingFrom,
       indianMission,

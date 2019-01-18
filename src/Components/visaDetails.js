@@ -8,6 +8,8 @@ import {API_URL} from './constants'
 import { Countries, SubmitButton, today } from "./common";
 import { DateInput } from "semantic-ui-calendar-react";
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
+
 export default class VisaDetails extends Component {
     constructor(){
         super();
@@ -22,7 +24,8 @@ export default class VisaDetails extends Component {
             portOfExitedIndia:"",
             lastVisitedCountry:"",
             },
-            countries:[]
+            countries:[],
+            apiFlag:false
         }
     }
     componentDidMount(){
@@ -38,15 +41,18 @@ handleSubmit = ()=>{
       axios.post(`${API_URL}/visa_detail`, {
         data:this.state.visaDetails,
     })
-    .then(function (response) {
+    .then( (response) => {
+      this.setState({apiFlag:true})
       console.log(response);
     })
     .catch(function (error) {
       console.log(error);
     })
-      window.location.href ="/photo_upload"
     }
   render() {
+    if (this.state.apiFlag === true) {
+      return <Redirect to='/photo_upload' />
+    }
       let {
         placeToBeVisited,
         visaDurationInMonth,

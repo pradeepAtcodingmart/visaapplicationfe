@@ -7,6 +7,8 @@ import {
 import {API_URL} from './constants'
 import { SubmitButton } from "./common";
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
+
 
 export default class FamilyDetails extends Component {
   constructor(){
@@ -25,7 +27,9 @@ export default class FamilyDetails extends Component {
         motherPlaceOfBirth:"",
         motherBirthCountry:""
       },
-      countries: []
+      countries: [],
+      apiFlag:false
+      
     }
   }
   handleValue =(event,{value,name})=>{
@@ -37,16 +41,19 @@ handleSubmit =()=>{
   axios.post(`${API_URL}/parent_detail`, {
     data:this.state.familyDetails,
 })
-.then(function (response) {
+.then( (response)=> {
+  this.setState({apiFlag:true})
   console.log(response);
 })
 .catch(function (error) {
   console.log(error);
 })
-  window.location.href ="/occupation_details"
 }
   render() {
-    debugger
+
+    if (this.state.apiFlag === true) {
+      return <Redirect to='occupation_details' />
+    }
     let {
       fatherName,
       fatherNationality,

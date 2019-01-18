@@ -18,7 +18,7 @@ export default class PhotoUpload extends Component {
     reader.readAsDataURL(e.target.files[0]);
   };
   handleSubmit =()=>{
-    window.location.href ="/"
+    // window.location.href ="/"
     }
   render() {
     return (

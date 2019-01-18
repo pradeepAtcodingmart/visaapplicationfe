@@ -1,4 +1,5 @@
-export const API_URL = 'http://localhost:3001'
+// export const API_URL = 'http://139.59.63.110:3000/'
+export const API_URL ='http://localhost:3001/'
 export const country =[
 {
     "name": "Greece",

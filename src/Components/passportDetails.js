@@ -8,6 +8,8 @@ import { DateInput } from "semantic-ui-calendar-react";
 import {Countries, SubmitButton, today} from './common'
 import {API_URL} from './constants'
 import axios from 'axios'
+import { Redirect } from 'react-router-dom'
+
 export default class PassportDetails extends Component {
   constructor(){
     super();
@@ -21,7 +23,8 @@ export default class PassportDetails extends Component {
         countryOfIssue:"",
         country:""
       },
-      countries:[]
+      countries:[],
+      apiFlag:false
     }
   }
   componentDidMount(){
@@ -38,15 +41,18 @@ handleSubmit = () =>{
   axios.post(`${API_URL}/passport_detail`, {
     data:this.state.passportDetails,
 })
-.then(function (response) {
+.then( (response) => {
+  this.setState({apiFlag:true})
   console.log(response);
 })
 .catch(function (error) {
   console.log(error);
 })
-  window.location.href ="/address_details"
 }
   render() {
+    if (this.state.apiFlag === true) {
+      return <Redirect to='/address_details' />
+    }
     let {passportNumber,placeOfIssue,dateOfIssue,dateOfExpiry,countryOfIssue,country} = this.state.passportDetails;
     let { countries } = this.state;
     return (

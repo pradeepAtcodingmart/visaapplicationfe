@@ -3,6 +3,8 @@ import { Form, Dropdown, Input } from "semantic-ui-react";
 import { Countries, SubmitButton } from "./common";
 import { API_URL } from "./constants";
 import axios from "axios";
+import { Redirect } from 'react-router-dom'
+
 export default class ApplicantAddressForm extends Component {
   constructor() {
     super();
@@ -16,7 +18,8 @@ export default class ApplicantAddressForm extends Component {
         pincode: "",
         mobileNo: ""
       },
-      countries: []
+      countries: [],
+      apiFlag:false
     };
   }
   componentDidMount(){
@@ -33,15 +36,18 @@ export default class ApplicantAddressForm extends Component {
     axios.post(`${API_URL}/address_detail`, {
       data:this.state.addressDetails,
   })
-  .then(function (response) {
+  .then( (response)=> {
+    this.setState({apiFlag:true})
     console.log(response);
   })
   .catch(function (error) {
     console.log(error);
   })
-    window.location.href = "/family_details"
   }
   render() {
+    if (this.state.apiFlag === true) {
+      return <Redirect to='/family_details' />
+    }
     let {
       street,
       village,
