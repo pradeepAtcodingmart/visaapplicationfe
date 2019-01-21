@@ -20,7 +20,7 @@ module.exports = {
       ref  : 'origin/master',
       repo : 'git@github.com:pradeepAtcodingmart/visaapplicationfe.git',
       path : '/var/www/visaapplicationfe',
-      'post-deploy' : 'yarn install && yarn build && pm2 stop all && yarn run prod:run'
+      'post-deploy' : 'npm install && npm run build && pm2 stop all && npm run prod:run'
     }
   }
 };
