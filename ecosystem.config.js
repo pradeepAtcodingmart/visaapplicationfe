@@ -24,7 +24,7 @@ module.exports = {
       ref  : 'origin/master',
       repo : 'git@github.com:pradeepAtcodingmart/visaapplicationbe.git',
       path : '/var/www/visaapplicationfe',
-      'post-deploy' : 'npm install'
+      'post-deploy' : 'npm install npm run build'
     }
   }
 };
