@@ -22,7 +22,7 @@ module.exports = {
       user : 'root',
       host : '139.59.63.110',
       ref  : 'origin/master',
-      repo : 'git@github.com:pradeepAtcodingmart/visaapplicationbe.git',
+      repo : 'git@github.com:pradeepAtcodingmart/visaapplicationfe.git',
       path : '/var/www/visaapplicationfe',
       'post-deploy' : 'npm install npm run build'
     }
