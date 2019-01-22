@@ -45,6 +45,74 @@ export default class ApplicantAddressForm extends Component {
   })
   }
   render() {
+    let array = [
+      {
+        type: "input",
+        label: "House No./Street",
+        name: "street",
+        value: street,
+        handleFunc: this.handleValue,
+        placeholder: "House No./Street",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "input",
+        label: "Village/Town/City",
+        name: "village",
+        value: village,
+        handleFunc: this.handleValue,
+        placeholder: "Village/Town/City",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "input",
+        label: "State",
+        name: "state",
+        value: state,
+        handleFunc: this.handleValue,
+        placeholder: "State",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "select",
+        label: "Country",
+        name: "country",
+        value: country,
+        handleFunc: this.handleValue,
+        placeholder: "Country",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "input",
+        label: "Mobile No",
+        name: "mobileNo",
+        value: mobileNo,
+        handleFunc: this.handleValue,
+        placeholder: "Mobile No",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "input",
+        label: "Pincode",
+        name: "pincode",
+        value: pincode,
+        handleFunc: this.handleValue,
+        placeholder: "Pincode",
+        props: {
+          fluid: true
+        }
+      }
+    ]
     if (this.state.apiFlag === true) {
       return <Redirect to='/family_details' />
     }

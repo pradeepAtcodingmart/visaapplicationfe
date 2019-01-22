@@ -58,6 +58,107 @@ handleSubmit =()=>{
 }
 
   render() {
+    let array = [
+      {
+        type: "select",
+        label: "Country you are applying visa from",
+        name: "visaApplyingFrom",
+        value: visaApplyingFrom,
+        handleFunc: this.handleValue,
+        placeholder: "Select Country",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "select",
+        label: "Indian Mission",
+        name: "indianMission",
+        value: indianMission,
+        handleFunc: this.handleValue,
+        placeholder: "Select Mission",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "input",
+        label: "Nationality",
+        name: "nationality",
+        value: nationality,
+        handleFunc: this.handleValue,
+        placeholder: "Select Nationality",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "date",
+        label: "Date Of Birth",
+        name: "dob",
+        value: dob,
+        handleFunc: this.handleValue,
+        placeholder: "Date Of Birth",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "input",
+        label: "Email",
+        name: "email",
+        value: email,
+        handleFunc: this.handleValue,
+        placeholder: "Email",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "input",
+        label: "Re Enter Email Id",
+        name: "reEnteredEmail",
+        value: reEnteredEmail,
+        handleFunc: this.handleValue,
+        placeholder: "Re Enter Email Id",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "date",
+        label: "Date Of Arrival",
+        name: "dateOfArrival",
+        value: dateOfArrival,
+        handleFunc: this.handleValue,
+        placeholder: "Date Of Arrival",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "select",
+        label: "Visa Type",
+        name: "visaType",
+        value: visaType,
+        handleFunc: this.handleValue,
+        placeholder: "Visa Type",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "select",
+        label: "Purpose",
+        name: "purpose",
+        value: purpose,
+        handleFunc: this.handleValue,
+        placeholder: "Purpose",
+        props: {
+          fluid: true
+        }
+      }
+    ]
     if (this.state.apiFlag === true) {
       return <Redirect to='/applicant_details' />
     }
@@ -122,7 +223,7 @@ handleSubmit =()=>{
                   maxDate={today}
                   required
                   readOnly
-                  fluid placeholder="Date of birth"
+                  fluid placeholder="Date of Arrival"
                   // initialDate={dob}
                   startMode={"year"}
                   dateFormat={"DD-MM-YYYY"}

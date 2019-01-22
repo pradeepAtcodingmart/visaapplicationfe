@@ -1,7 +1,8 @@
 import React from "react";
 import {
   Button,
-  Form
+  Form,
+  Input
 } from "semantic-ui-react";
 import axios from 'axios'
 import {API_URL} from './constants'
@@ -91,3 +92,23 @@ export const purposes= [
     value: "Conference"
   }
 ]
+
+export const formCreater = (form)=>{
+let form1 = form.map((filed)=>{
+            return(
+                <Form.Field inline required>
+                    <label>{filed.label}</label>
+                    <Input
+                    name={filed.name}
+                    value={filed.value}
+                    placeholder={filed.placeholder}
+                    onChange={filed.handleFunc}
+                    {...filed.props}
+                    />
+              </Form.Field>
+            );
+    }
+);
+
+return form1;
+}

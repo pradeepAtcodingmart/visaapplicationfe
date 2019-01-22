@@ -63,6 +63,85 @@ export default class ApplicantDetails extends Component {
   //  window.location.href ="/passport_details"
   }
   render() {
+    let array = [
+      {
+        type: "input",
+        label: "Name",
+        name: "name",
+        value: name,
+        handleFunc: this.handleValue,
+        placeholder: "Name",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "select",
+        label: "Select Gender",
+        name: "gender",
+        value: gender,
+        handleFunc: this.handleValue,
+        placeholder: "Select  Gender",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "input",
+        label: "City Of Birth",
+        name: "birthCity",
+        value: birthCity,
+        handleFunc: this.handleValue,
+        placeholder: "City Of Birth",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "input",
+        label: "Country Of Birth",
+        name: "birthCountry",
+        value: birthCountry,
+        handleFunc: this.handleValue,
+        placeholder: "Country Of Birth",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "select",
+        label: "Religion",
+        name: "religion",
+        value: religion,
+        handleFunc: this.handleValue,
+        placeholder: "Religion",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "input",
+        label: "Visible identification marks",
+        name: "identificationMark",
+        value: identificationMark,
+        handleFunc: this.handleValue,
+        placeholder: "Visible identification marks",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "select",
+        label: "Education Qualification",
+        name: "education",
+        value: education,
+        handleFunc: this.handleValue,
+        placeholder: "Education Qualification",
+        props: {
+          fluid: true
+        }
+      }
+    ]
     if (this.state.apiFlag === true) {
       return <Redirect to='/passport_details' />
     }
