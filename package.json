@@ -71,8 +71,7 @@
     "start": "PORT=3001 node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js --env=jsdom",
-    "prod:start": "node server.js",
-    "prod:run": "pm2 start npm --name 'visaapplicationfe' -- run prod:start"
+    "production": "pm2 start server.js --name 'visaapplicationfe'"
   },
   "eslintConfig": {
     "extends": "react-app"
