@@ -23,6 +23,16 @@ export default class PassportDetails extends Component {
       apiFlag: false
     };
   }
+  componentWillMount(){
+    axios
+    .get("https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=JtWbUqsMKk7yWvvCCDBymYJaWgVelosk")
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+  }
   componentDidMount() {
     Countries().then(data => {
       this.setState({ countries: data });
@@ -82,36 +92,48 @@ export default class PassportDetails extends Component {
         }
       },
       {
-        type: "DateInputs",
+        type: "date",
         label: "Date of Expiry",
         name: "dateOfExpiry",
         value: dateOfExpiry,
         handleFunc: this.handleValues,
         placeholder: "Date of Expiry",
+        maxDate:today,
+        minDate:new Date("01-01-1950"),
+        dateFormat:"DD-MM-YYYY",
+        iconPosition:"left",
         props: {
-          fluid: true
+          fluid: true,
+          required:true,
+          readOnly:true
         }
       },
       {
-        type: "input",
+        type: "select",
         label: "Country Of Issue",
         name: "countryOfIssue",
         value: countryOfIssue,
         handleFunc: this.handleValues,
         placeholder: "Select Country",
+        options:this.state.countries,
         props: {
-          fluid: true
+          fluid: true,
+          search:true,
+          selection:true
         }
       },
       {
-        type: "input",
+        type: "select",
         label: "Nationality mentioned there in",
         name: "country",
         value: country,
         handleFunc: this.handleValues,
         placeholder: "Select Country",
+        options:this.state.countries,
         props: {
-          fluid: true
+          fluid: true,
+          search:true,
+          selection:true
         }
       }
     ];
@@ -136,7 +158,7 @@ export default class PassportDetails extends Component {
                 <label>Passport Number</label>
                 <Input fluid placeholder="Passport number" name="passportNumber"  value={passportNumber} onChange={this.handleValue}/>
               </Form.Field> */}
-        <Form.Field inline required>
+        {/* <Form.Field inline required>
           <label>Place of Issue</label>
           <Input
             fluid
@@ -205,7 +227,7 @@ export default class PassportDetails extends Component {
             selection
             options={countries}
           />
-        </Form.Field>
+        </Form.Field> */}
         {SubmitButton}
       </Form>
     );

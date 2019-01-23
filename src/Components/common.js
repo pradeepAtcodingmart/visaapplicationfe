@@ -2,8 +2,10 @@ import React from "react";
 import {
   Button,
   Form,
-  Input
+  Input,
+  Dropdown
 } from "semantic-ui-react";
+import { DateInput } from "semantic-ui-calendar-react";
 import axios from 'axios'
 import {API_URL} from './constants'
 export const returnDropdownOptions = (items, key, value) => {
@@ -95,18 +97,67 @@ export const purposes= [
 
 export const formCreater = (form)=>{
 let form1 = form.map((filed)=>{
-            return(
-                <Form.Field inline required>
-                    <label>{filed.label}</label>
-                    <Input
-                    name={filed.name}
-                    value={filed.value}
-                    placeholder={filed.placeholder}
-                    onChange={filed.handleFunc}
-                    {...filed.props}
-                    />
-              </Form.Field>
-            );
+   switch(filed.type){
+     case "input" :
+        return(
+          <Form.Field inline required>
+              <label>{filed.label}</label>
+              <Input
+              name={filed.name}
+              value={filed.value}
+              placeholder={filed.placeholder}
+              onChange={filed.handleFunc}
+              {...filed.props}
+              />
+        </Form.Field>
+  );
+  break;
+  case "date" :
+  return(
+    <Form.Field inline required>
+        <label>{filed.label}</label>
+        <DateInput
+        name={filed.name}
+        value={filed.value}
+        placeholder={filed.placeholder}
+        onChange={filed.handleFunc}
+        maxDate={filed.maxDate}
+        minDate={filed.minDate}
+        dateFormat={filed.dateFormat}
+        iconPosition={filed.iconPosition}
+        {...filed.props}
+        />
+  </Form.Field>
+);
+break;
+case "select" :
+return(
+  <Form.Field inline required>
+      <label>{filed.label}</label>
+      <Dropdown
+      name={filed.name}
+      value={filed.value}
+      placeholder={filed.placeholder}
+      onChange={filed.handleFunc}
+      options={filed.options}
+      {...filed.props}
+      />
+</Form.Field>
+);
+break;
+   }
+            // return(
+            //     <Form.Field inline required>
+            //         <label>{filed.label}</label>
+            //         <Input
+            //         name={filed.name}
+            //         value={filed.value}
+            //         placeholder={filed.placeholder}
+            //         onChange={filed.handleFunc}
+            //         {...filed.props}
+            //         />
+            //   </Form.Field>
+            // );
     }
 );
 
