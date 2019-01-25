@@ -123,7 +123,7 @@ let form1 = form.map((filed)=>{
         onChange={filed.handleFunc}
         maxDate={filed.maxDate}
         minDate={filed.minDate}
-        dateFormat={filed.dateFormat}
+        dateFormat="YYYY-MM-DD"
         iconPosition={filed.iconPosition}
         {...filed.props}
         />
@@ -146,18 +146,6 @@ return(
 );
 break;
    }
-            // return(
-            //     <Form.Field inline required>
-            //         <label>{filed.label}</label>
-            //         <Input
-            //         name={filed.name}
-            //         value={filed.value}
-            //         placeholder={filed.placeholder}
-            //         onChange={filed.handleFunc}
-            //         {...filed.props}
-            //         />
-            //   </Form.Field>
-            // );
     }
 );
 

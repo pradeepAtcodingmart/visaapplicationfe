@@ -23,16 +23,6 @@ export default class PassportDetails extends Component {
       apiFlag: false
     };
   }
-  componentWillMount(){
-    axios
-    .get("https://api.nytimes.com/svc/search/v2/articlesearch.json?q=election&api-key=JtWbUqsMKk7yWvvCCDBymYJaWgVelosk")
-    .then(response => {
-      console.log(response.data);
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
-  }
   componentDidMount() {
     Countries().then(data => {
       this.setState({ countries: data });
@@ -41,6 +31,7 @@ export default class PassportDetails extends Component {
   handleValue = (event, { value, name }) => {
     let { passportDetails } = this.state;
     passportDetails[name] = value;
+    debugger
     this.setState({ passportDetails });
   };
   handleSubmit = () => {
@@ -57,6 +48,16 @@ export default class PassportDetails extends Component {
       });
   };
   render() {
+    let {
+      passportNumber,
+      placeOfIssue,
+      dateOfIssue,
+      dateOfExpiry,
+      countryOfIssue,
+      country
+    } = this.state.passportDetails;
+    let { countries } = this.state;
+    debugger
     let array = [
       {
         type: "input",
@@ -74,19 +75,22 @@ export default class PassportDetails extends Component {
         label: "Place of Issue",
         name: "placeOfIssue",
         value: placeOfIssue,
-        handleFunc: this.handleValueport,
+        handleFunc: this.handleValue,
         placeholder: "Place of issue",
         props: {
           fluid: true
         }
       },
       {
-        type: "DateInputs",
+        type: "date",
         label: "Date of issue",
         name: "dateOfIssue",
         value: dateOfIssue,
-        handleFunc: this.handleValues,
+        handleFunc: this.handleValue,
         placeholder: "Date of issue",
+        maxDate:today,
+        minDate:new Date("01-01-1950"),
+        iconPosition:"left",
         props: {
           fluid: true
         }
@@ -96,11 +100,10 @@ export default class PassportDetails extends Component {
         label: "Date of Expiry",
         name: "dateOfExpiry",
         value: dateOfExpiry,
-        handleFunc: this.handleValues,
+        handleFunc: this.handleValue,
         placeholder: "Date of Expiry",
         maxDate:today,
         minDate:new Date("01-01-1950"),
-        dateFormat:"DD-MM-YYYY",
         iconPosition:"left",
         props: {
           fluid: true,
@@ -113,9 +116,9 @@ export default class PassportDetails extends Component {
         label: "Country Of Issue",
         name: "countryOfIssue",
         value: countryOfIssue,
-        handleFunc: this.handleValues,
+        handleFunc: this.handleValue,
         placeholder: "Select Country",
-        options:this.state.countries,
+        options:countries,
         props: {
           fluid: true,
           search:true,
@@ -127,9 +130,9 @@ export default class PassportDetails extends Component {
         label: "Nationality mentioned there in",
         name: "country",
         value: country,
-        handleFunc: this.handleValues,
+        handleFunc: this.handleValue,
         placeholder: "Select Country",
-        options:this.state.countries,
+        options:countries,
         props: {
           fluid: true,
           search:true,
@@ -138,96 +141,13 @@ export default class PassportDetails extends Component {
       }
     ];
     let form = formCreater(array);
-    console.log(form);
     if (this.state.apiFlag === true) {
       return <Redirect to="/address_details" />;
     }
-    let {
-      passportNumber,
-      placeOfIssue,
-      dateOfIssue,
-      dateOfExpiry,
-      countryOfIssue,
-      country
-    } = this.state.passportDetails;
-    let { countries } = this.state;
+    
     return (
       <Form onSubmit={this.handleSubmit}>
         {form}
-        {/* <Form.Field inline required>
-                <label>Passport Number</label>
-                <Input fluid placeholder="Passport number" name="passportNumber"  value={passportNumber} onChange={this.handleValue}/>
-              </Form.Field> */}
-        {/* <Form.Field inline required>
-          <label>Place of Issue</label>
-          <Input
-            fluid
-            placeholder="Place of issue"
-            name="placeOfIssue"
-            value={placeOfIssue}
-            onChange={this.handleValue}
-          />
-        </Form.Field>
-        <Form.Field inline>
-          <label>Date of issue</label>
-          <DateInput
-            name="dateOfIssue"
-            required
-            readOnly
-            fluid
-            placeholder="Date of issue"
-            maxDate={today}
-            // initialDate={dob}
-            value={dateOfIssue}
-            startMode={"year"}
-            dateFormat={"DD-MM-YYYY"}
-            iconPosition="left"
-            onChange={this.handleValue}
-          />
-        </Form.Field>
-        <Form.Field inline>
-          <label>Date of expiry</label>
-          <DateInput
-            name="dateOfExpiry"
-            required
-            readOnly
-            fluid
-            placeholder="Date of expiry"
-            // initialDate={dob}
-            maxDate={today}
-            value={dateOfExpiry}
-            startMode={"year"}
-            dateFormat={"DD-MM-YYYY"}
-            iconPosition="left"
-            onChange={this.handleValue}
-          />
-        </Form.Field>
-        <Form.Field inline required>
-          <label>Country of Issue</label>
-          <Dropdown
-            fluid
-            placeholder="Select Country"
-            name="countryOfIssue"
-            value={countryOfIssue}
-            onChange={this.handleValue}
-            search
-            selection
-            options={countries}
-          />
-        </Form.Field>
-        <Form.Field inline required>
-          <label>Nationality mentioned there in</label>
-          <Dropdown
-            fluid
-            placeholder="Select Country"
-            name="country"
-            value={country}
-            onChange={this.handleValue}
-            search
-            selection
-            options={countries}
-          />
-        </Form.Field> */}
         {SubmitButton}
       </Form>
     );

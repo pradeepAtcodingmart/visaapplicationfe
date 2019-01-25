@@ -5,7 +5,7 @@ import {
   Dropdown
 } from "semantic-ui-react";
 import {API_URL} from './constants'
-import { Countries, SubmitButton, today } from "./common";
+import { Countries, SubmitButton, today, formCreater } from "./common";
 import { DateInput } from "semantic-ui-calendar-react";
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
@@ -63,48 +63,97 @@ handleSubmit = ()=>{
         lastVisitedCountry, 
       } = this.state.visaDetails;
       let { countries } = this.state;
+      let array =[
+        {
+          type: "input",
+          label: "Place to be visited",
+          name:"placeToBeVisited",
+          value:placeToBeVisited,
+          handleFunc: this.handleValue,
+          placeholder:"place to be visited",
+          props: {
+            fluid: true
+          }
+        },
+        {
+          type: "input",
+          label: "Visa duration in month",
+          name:"visaDurationInMonth",
+          value: visaDurationInMonth,
+          handleFunc: this.handleValue,
+          placeholder:"visa duration in month",
+          props: {
+            fluid: true
+          }
+        },
+        {
+          type: "input",
+          label: "No of entries",
+          name:"noOfEntries",
+          value: noOfEntries,
+          handleFunc: this.handleValue,
+          placeholder:"no of entries",
+          props: {
+            fluid: true
+          }
+        },
+        {
+          type: "date",
+          label: "Data of journey",
+          name: "dateOfJourney",
+          value: dateOfJourney,
+          handleFunc: this.handleValue,
+          placeholder: "data of journey",
+          maxDate:today,
+          minDate:new Date("01-01-1950"),
+          iconPosition:"left",
+          props: {
+            fluid: true,
+            required:true,
+            readOnly:true
+          }
+        },
+        {
+          type: "input",
+          label: "Port of arrival in india",
+          name:"portOfArrivalIndia",
+          value: portOfArrivalIndia,
+          handleFunc: this.handleValue,
+          placeholder:"port of arrival in india",
+          props: {
+            fluid: true
+          }
+        },
+        {
+          type: "input",
+          label: "Port of exited in india",
+          name:"portOfExitedIndia",
+          value: portOfExitedIndia,
+          handleFunc: this.handleValue,
+          placeholder:"port of exited in india",
+          props: {
+            fluid: true
+          }
+        },
+        {
+          type: "select",
+          label: "Countries of visited in decade",
+          name:"lastVisitedCountry",
+          value: lastVisitedCountry,
+          handleFunc: this.handleValue,
+          placeholder:"Countries of visited",
+          options:countries,
+          props: {
+            fluid: true,
+            search:true,
+            selection:true
+          }
+        }
+      ];
+      let form = formCreater(array); 
     return (
         <Form onSubmit={this.handleSubmit}>
-            <Form.Field inline required>
-                <label>Place to be visited</label>
-                <Input fluid placeholder="place to be visited" name="placeToBeVisited" value={placeToBeVisited} onChange={this.handleValue}/>
-              </Form.Field>
-              <Form.Field inline required>
-                <label>Visa duration in month</label>
-                <Input fluid placeholder="visa duration in month" name="visaDurationInMonth" value={visaDurationInMonth} onChange={this.handleValue}/>
-              </Form.Field>
-              <Form.Field inline required>
-                <label>No of entries</label>
-                <Input fluid placeholder="no of entries" name="noOfEntries" value={noOfEntries} onChange={this.handleValue}/>
-              </Form.Field>
-              <Form.Field inline required>
-                <label>Data of journey</label>
-                <DateInput
-                  name="dateOfJourney"
-                  required
-                  readOnly
-                  maxDate={today}
-                  fluid placeholder="data of journey"
-                  // initialDate={dob}
-                  value={dateOfJourney}
-                  startMode={"year"}
-                  dateFormat={"DD-MM-YYYY"}
-                  iconPosition="left"
-                  onChange={this.handleValue}
-                />
-                </Form.Field>
-              <Form.Field inline required>
-                <label>Port of arrival in india</label>
-                <Input fluid placeholder="port of arrival in india" name="portOfArrivalIndia" value={portOfArrivalIndia} onChange={this.handleValue}/>
-              </Form.Field>
-              <Form.Field inline required>
-                <label>Port of exited in india</label>
-                <Input fluid placeholder="port of exited in india" name="portOfExitedIndia" value={portOfExitedIndia} onChange={this.handleValue}/>
-              </Form.Field>
-              <Form.Field inline required>
-                <label>Countries of visited in decade</label>
-                <Dropdown  fluid placeholder="Countries of visited"   search selection name="lastVisitedCountry" value={lastVisitedCountry} options={countries} onChange={this.handleValue}/>
-              </Form.Field> 
+              {form}
             {SubmitButton}
         </Form>
     );

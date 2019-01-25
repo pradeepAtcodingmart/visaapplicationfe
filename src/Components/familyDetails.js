@@ -5,7 +5,7 @@ import {
   Input
 } from "semantic-ui-react";
 import {API_URL} from './constants'
-import { SubmitButton } from "./common";
+import { SubmitButton, formCreater } from "./common";
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
 
@@ -67,48 +67,140 @@ handleSubmit =()=>{
       motherBirthCountry
     }= this.state;
     let {countries}=this.state;
+    let array = [
+      {
+        type: "input",
+        label: "Father Name",
+        name:"fatherName",
+        value: fatherName,
+        handleFunc: this.handleValue,
+        placeholder:"father name",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "select",
+        label: "Nationality",
+        name:"fatherNationality",
+        value: fatherNationality,
+        handleFunc: this.handleValue,
+        placeholder:"Select Country",
+        options:countries,
+        props: {
+          fluid: true,
+          search:true,
+          selection:true
+        }
+      },
+      {
+        type: "select",
+        label: "Previous nationality",
+        name:"fatherNationality",
+        value: fatherPreviousNationality,
+        handleFunc: this.handleValue,
+        placeholder:"Select Country",
+        options:countries,
+        props: {
+          fluid: true,
+          search:true,
+          selection:true
+        }
+      },
+      {
+        type: "input",
+        label: "Place of birth",
+        name:"fatherPlaceOfBirth",
+        value: fatherPlaceOfBirth,
+        handleFunc: this.handleValue,
+        placeholder:"place of birth",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "select",
+        label: "Country of birth",
+        name:"fatherBirthCountry",
+        value: fatherBirthCountry,
+        handleFunc: this.handleValue,
+        placeholder:"Select Country",
+        options:countries,
+        props: {
+          fluid: true,
+          search:true,
+          selection:true
+        }
+      },
+      {
+        type: "input",
+        label: "Mother Name",
+        name:"motherName",
+        value: motherName,
+        handleFunc: this.handleValue,
+        placeholder:"mother name",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "select",
+        label: "Nationality",
+        name:"motherNationality",
+        value: motherNationality,
+        handleFunc: this.handleValue,
+        placeholder:"Select Country",
+        options:countries,
+        props: {
+          fluid: true,
+          search:true,
+          selection:true
+        }
+      },
+      {
+        type: "select",
+        label: "Previous nationality",
+        name:"motherNationality",
+        value: motherPreviousNationality,
+        handleFunc: this.handleValue,
+        placeholder:"Select Country",
+        options:countries,
+        props: {
+          fluid: true,
+          search:true,
+          selection:true
+        }
+      },
+      {
+        type: "input",
+        label: "Place of birth",
+        name:"motherPlaceOfBirth",
+        value: motherPlaceOfBirth,
+        handleFunc: this.handleValue,
+        placeholder:"place of birth",
+        props: {
+          fluid: true
+        }
+      },
+      {
+        type: "select",
+        label: "Country of birth",
+        name:"motherBirthCountry",
+        value: motherBirthCountry,
+        handleFunc: this.handleValue,
+        placeholder:"Select Country",
+        options:countries,
+        props: {
+          fluid: true,
+          search:true,
+          selection:true
+        }
+      },              
+    ];
+    let form = formCreater(array);
     return (
             <Form onSubmit={this.handleSubmit}>
-              <Form.Field inline required>
-                <label>Father Name</label>
-                <Input name="name" fluid placeholder="father name" value={fatherName} onChange={this.handleValue}/>
-              </Form.Field>
-              <Form.Field inline required>
-                <label>Nationality</label>
-                <Dropdown fluid placeholder="Select Country" name={fatherNationality} search selection options={countries} onChange={this.handleValue} />
-              </Form.Field>
-              <Form.Field inline required>
-                <label>Previous nationality</label>
-                <Dropdown fluid placeholder="Select Country" name={fatherPreviousNationality} search selection options={countries} onChange={this.handleValue}/>
-              </Form.Field>
-              <Form.Field inline required>
-                <label>Place of birth</label>
-                <Input name="placeOfBirth"  fluid placeholder="place of birth" value={fatherPlaceOfBirth} onChange={this.handleValue}/>
-              </Form.Field>
-              <Form.Field inline required>
-                <label>Country of birth</label>
-                <Dropdown fluid placeholder="Select Country" name={fatherBirthCountry} search selection options={countries} />
-              </Form.Field>
-              <Form.Field inline required>
-                <label>Mother Name</label>
-                <Input name="mother name" fluid placeholder="name" value={motherName} onChange={this.handleValue}/>
-              </Form.Field>
-              <Form.Field inline required>
-                <label>Nationality</label>
-                <Dropdown fluid placeholder="Select Country" name={motherNationality} search selection options={countries} onChange={this.handleValue} />
-              </Form.Field>
-              <Form.Field inline required>
-                <label>Previous nationality</label>
-                <Dropdown fluid placeholder="Select Country" name={motherPreviousNationality} search selection options={countries} onChange={this.handleValue}/>
-              </Form.Field>
-              <Form.Field inline required>
-                <label>Place of birth</label>
-                <Input name="placeOfBirth"  fluid placeholder="place of birth" value={motherPlaceOfBirth} onChange={this.handleValue}/>
-              </Form.Field>
-              <Form.Field inline required>
-                <label>Country of birth</label>
-                <Dropdown fluid placeholder="Select Country" name={motherBirthCountry} onChange={this.handleValue} search selection options={[]} />
-              </Form.Field>
+              {form}
               {SubmitButton}
             </Form>
     );
